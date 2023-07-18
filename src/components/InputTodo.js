@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const InputTodo = ({ addTodoItem }) => {
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
   // ...
+
+  InputTodo.propTypes = {
+    addTodoItem: PropTypes.func.isRequired,
+  };
 
   const handleChange = (e) => {
     setTitle(e.target.value);
@@ -22,16 +27,17 @@ const InputTodo = ({ addTodoItem }) => {
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Add Todo..."
-        value={title}
-         onChange={handleChange}
-      />
-      <button>Submit</button>
-    </form>
-    <span>{message}</span>
+      <form onSubmit={handleSubmit} className="form-container">
+        <input
+          type="text"
+          placeholder="Add Todo..."
+          value={title}
+          onChange={handleChange}
+          className="input-text"
+        />
+        <button type="button" className="input-submit">Submit</button>
+      </form>
+      <span className="submit-warning">{message}</span>
     </>
   );
 };
