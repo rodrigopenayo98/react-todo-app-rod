@@ -1,8 +1,9 @@
 import InputTodo from './InputTodo.js';
-import TodoList from './TodoList.js';
+import TodosList from './TodoList.js';
+import { useState } from 'react';
 
 const TodosLogic = () => {
-  const todos = [
+  const [todos, setTodos] = useState([
     {
       id: 1,
       title: 'Setup development environment',
@@ -18,11 +19,20 @@ const TodosLogic = () => {
       title: 'Deploy to live server',
       completed: false,
     },
-  ];
+  ]);
+
+  const delTodo = (id) => {
+    setTodos([
+      ...todos.filter((todo) => {
+        return todo.id !== id;
+      }),
+    ]);
+  };
+
   return (
     <div>
-      <InputTodo/>
-      <TodoList todosProps={todos}/>
+      <InputTodo />
+      <TodosList todosProps={todos} setTodos={setTodos} delTodo={delTodo}/>
     </div>
   );
 }
