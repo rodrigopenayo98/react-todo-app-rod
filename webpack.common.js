@@ -1,6 +1,4 @@
 const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -8,16 +6,8 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
     clean: true,
-    assetModuleFilename: 'images/\[name\][ext][query]'
+    assetModuleFilename: 'images/[name][ext][query]', // Elimina los caracteres de escape innecesarios
   },
-  plugins: [
-    new HTMLWebpackPlugin({
-      template: './src/index.html',
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'styles.css',
-    })
-  ],
   module: {
     rules: [
       {
@@ -29,10 +19,6 @@ module.exports = {
         test: /\.(png|svg|jpg|gif)/i,
         type: 'asset/resource',
       },
-      {
-        test: /\.css/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      }
     ],
   },
 };
